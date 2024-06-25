@@ -4,6 +4,7 @@ function Stock({ stock: { id, ticker, name, type, price }, handlePortfolio }) {
   function handleOnClick() {
     handlePortfolio(id)
   }
+
   return (
     <div>
       <div className="card" value={type} onClick={handleOnClick}>

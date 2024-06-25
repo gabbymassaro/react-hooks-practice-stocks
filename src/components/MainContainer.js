@@ -5,6 +5,8 @@ import SearchBar from "./SearchBar"
 
 function MainContainer() {
   const [stocks, setStocks] = useState([])
+  const [isAlphabetical, setIsAlphabetical] = useState(false)
+  const [isPrice, setIsPrice] = useState(false)
 
   useEffect(() => {
     fetch("http://localhost:3001/stocks")
@@ -44,12 +46,25 @@ function MainContainer() {
     setStocks(soldStocks)
   }
 
+  // const sortedStocks = [...stocks].sort((a, b) => a.name.localeCompare(b.name))
+  // console.log(sortedStocks)
+
+  console.log("This is Alpahbetical State: ", isAlphabetical)
+  console.log("This is Price State: ", isPrice)
+
   return (
     <div>
-      <SearchBar />
+      <SearchBar
+        setIsAlphabetical={setIsAlphabetical}
+        setIsPrice={setIsPrice}
+      />
       <div className="row">
         <div className="col-8">
-          <StockContainer stocks={stocks} handlePortfolio={handlePortfolio} />
+          <StockContainer
+            stocks={stocks}
+            handlePortfolio={handlePortfolio}
+            isAlphabetical={isAlphabetical}
+          />
         </div>
         <div className="col-4">
           <PortfolioContainer

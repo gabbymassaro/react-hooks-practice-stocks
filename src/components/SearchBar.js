@@ -1,6 +1,15 @@
-import React from "react";
+import React from "react"
 
-function SearchBar() {
+function SearchBar({ setIsAlphabetical, setIsPrice }) {
+  function handleRadioButtons(event) {
+    if (event.target.value === "Alphabetically") {
+      setIsAlphabetical(true)
+      setIsPrice(false)
+    } else if (event.target.value === "Price") {
+      setIsAlphabetical(false)
+      setIsPrice(true)
+    }
+  }
   return (
     <div>
       <strong>Sort by:</strong>
@@ -10,7 +19,7 @@ function SearchBar() {
           value="Alphabetically"
           name="sort"
           checked={null}
-          onChange={null}
+          onChange={(e) => handleRadioButtons(e)}
         />
         Alphabetically
       </label>
@@ -20,7 +29,7 @@ function SearchBar() {
           value="Price"
           name="sort"
           checked={null}
-          onChange={null}
+          onChange={(e) => handleRadioButtons(e)}
         />
         Price
       </label>
@@ -34,7 +43,7 @@ function SearchBar() {
         </select>
       </label>
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar
