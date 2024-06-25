@@ -1,6 +1,12 @@
 import React from "react"
 
-function SearchBar({ setIsAlphabetical, setIsPrice, handleSorting }) {
+function SearchBar({
+  setIsAlphabetical,
+  setIsPrice,
+  handleSorting,
+  setFilterByType,
+  handleFilter,
+}) {
   function handleRadioButtons(event) {
     if (event.target.value === "Alphabetically") {
       setIsAlphabetical(true)
@@ -11,6 +17,12 @@ function SearchBar({ setIsAlphabetical, setIsPrice, handleSorting }) {
     }
     handleSorting()
   }
+
+  function handleFilterChanges(event) {
+    setFilterByType(event.target.value)
+    handleFilter()
+  }
+
   return (
     <div>
       <strong>Sort by:</strong>
@@ -37,7 +49,7 @@ function SearchBar({ setIsAlphabetical, setIsPrice, handleSorting }) {
       <br />
       <label>
         <strong>Filter:</strong>
-        <select onChange={null}>
+        <select onChange={(event) => handleFilterChanges(event)}>
           <option value="Tech">Tech</option>
           <option value="Sportswear">Sportswear</option>
           <option value="Finance">Finance</option>

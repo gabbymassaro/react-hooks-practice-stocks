@@ -7,6 +7,7 @@ function MainContainer() {
   const [stocks, setStocks] = useState([])
   const [isAlphabetical, setIsAlphabetical] = useState(false)
   const [isPrice, setIsPrice] = useState(false)
+  const [filterByType, setFilterByType] = useState("")
 
   useEffect(() => {
     fetch("http://localhost:3001/stocks")
@@ -56,8 +57,12 @@ function MainContainer() {
     }
   }
 
-  console.log("This is Alpahbetical State: ", isAlphabetical)
-  console.log("This is Price State: ", isPrice)
+  function handleFilter() {
+    if (filterByType !== "") {
+      const filtered = stocks.filter((stock) => filterByType === stock.type)
+      return filtered
+    }
+  }
 
   return (
     <div>
@@ -65,6 +70,8 @@ function MainContainer() {
         setIsAlphabetical={setIsAlphabetical}
         setIsPrice={setIsPrice}
         handleSorting={handleSorting}
+        setFilterByType={setFilterByType}
+        handleFilter={handleFilter}
       />
       <div className="row">
         <div className="col-8">
