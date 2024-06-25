@@ -46,8 +46,15 @@ function MainContainer() {
     setStocks(soldStocks)
   }
 
-  // const sortedStocks = [...stocks].sort((a, b) => a.name.localeCompare(b.name))
-  // console.log(sortedStocks)
+  function handleSorting() {
+    if (!isAlphabetical) {
+      const alphaSort = [...stocks].sort((a, b) => a.name.localeCompare(b.name))
+      setStocks(alphaSort)
+    } else if (!isPrice) {
+      const priceSort = [...stocks].sort((a, b) => a.price - b.price)
+      setStocks(priceSort)
+    }
+  }
 
   console.log("This is Alpahbetical State: ", isAlphabetical)
   console.log("This is Price State: ", isPrice)
@@ -57,6 +64,7 @@ function MainContainer() {
       <SearchBar
         setIsAlphabetical={setIsAlphabetical}
         setIsPrice={setIsPrice}
+        handleSorting={handleSorting}
       />
       <div className="row">
         <div className="col-8">

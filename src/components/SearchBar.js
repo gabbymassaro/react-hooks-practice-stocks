@@ -1,6 +1,6 @@
 import React from "react"
 
-function SearchBar({ setIsAlphabetical, setIsPrice }) {
+function SearchBar({ setIsAlphabetical, setIsPrice, handleSorting }) {
   function handleRadioButtons(event) {
     if (event.target.value === "Alphabetically") {
       setIsAlphabetical(true)
@@ -9,6 +9,7 @@ function SearchBar({ setIsAlphabetical, setIsPrice }) {
       setIsAlphabetical(false)
       setIsPrice(true)
     }
+    handleSorting()
   }
   return (
     <div>
@@ -19,7 +20,7 @@ function SearchBar({ setIsAlphabetical, setIsPrice }) {
           value="Alphabetically"
           name="sort"
           checked={null}
-          onChange={(e) => handleRadioButtons(e)}
+          onClick={(event) => handleRadioButtons(event)}
         />
         Alphabetically
       </label>
@@ -29,7 +30,7 @@ function SearchBar({ setIsAlphabetical, setIsPrice }) {
           value="Price"
           name="sort"
           checked={null}
-          onChange={(e) => handleRadioButtons(e)}
+          onClick={(event) => handleRadioButtons(event)}
         />
         Price
       </label>
