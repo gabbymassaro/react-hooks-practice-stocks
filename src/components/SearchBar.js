@@ -1,6 +1,28 @@
-import React from "react";
+import React from "react"
 
-function SearchBar() {
+function SearchBar({
+  setIsAlphabetical,
+  setIsPrice,
+  handleSorting,
+  setFilterByType,
+  handleFilter,
+}) {
+  function handleRadioButtons(event) {
+    if (event.target.value === "Alphabetically") {
+      setIsAlphabetical(true)
+      setIsPrice(false)
+    } else if (event.target.value === "Price") {
+      setIsAlphabetical(false)
+      setIsPrice(true)
+    }
+    handleSorting()
+  }
+
+  function handleFilterChanges(event) {
+    setFilterByType(event.target.value)
+    handleFilter()
+  }
+
   return (
     <div>
       <strong>Sort by:</strong>
@@ -10,7 +32,7 @@ function SearchBar() {
           value="Alphabetically"
           name="sort"
           checked={null}
-          onChange={null}
+          onClick={(event) => handleRadioButtons(event)}
         />
         Alphabetically
       </label>
@@ -20,21 +42,21 @@ function SearchBar() {
           value="Price"
           name="sort"
           checked={null}
-          onChange={null}
+          onClick={(event) => handleRadioButtons(event)}
         />
         Price
       </label>
       <br />
       <label>
         <strong>Filter:</strong>
-        <select onChange={null}>
+        <select onChange={(event) => handleFilterChanges(event)}>
           <option value="Tech">Tech</option>
           <option value="Sportswear">Sportswear</option>
           <option value="Finance">Finance</option>
         </select>
       </label>
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar
