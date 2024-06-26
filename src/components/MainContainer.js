@@ -7,7 +7,8 @@ function MainContainer() {
   const [stocks, setStocks] = useState([])
   const [isAlphabetical, setIsAlphabetical] = useState(false)
   const [isPrice, setIsPrice] = useState(false)
-  const [filterByType, setFilterByType] = useState("")
+  const [filterByType, setFilterByType] = useState(null)
+  const [filteredStocks, setFilteredStocks] = useState([])
 
   useEffect(() => {
     fetch("http://localhost:3001/stocks")
@@ -20,6 +21,10 @@ function MainContainer() {
         setStocks(initialStock)
       })
   }, [])
+
+  useEffect(() => {
+    handleFilter()
+  }, [stocks, filterByType])
 
   function handlePortfolio(id) {
     const newStocks = stocks.map((stock) => {
@@ -58,9 +63,11 @@ function MainContainer() {
   }
 
   function handleFilter() {
-    if (filterByType !== "") {
+    if (filterByType === null) {
+      setFilteredStocks(stocks)
+    } else {
       const filtered = stocks.filter((stock) => filterByType === stock.type)
-      return filtered
+      setFilteredStocks(filtered)
     }
   }
 
@@ -79,6 +86,7 @@ function MainContainer() {
             stocks={stocks}
             handlePortfolio={handlePortfolio}
             isAlphabetical={isAlphabetical}
+            filteredStocks={filteredStocks}
           />
         </div>
         <div className="col-4">
